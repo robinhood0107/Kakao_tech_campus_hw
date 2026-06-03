@@ -1,0 +1,396 @@
+:root {
+  --primary-color: #672be0;
+  --primary-soft: #f0ebff;
+  --text-color: #23212a;
+  --muted-color: #746f80;
+  --line-color: #e8e5ef;
+  --panel-color: #ffffff;
+  --page-color: #f7f6fb;
+  --danger-color: #d9465f;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--page-color);
+  color: var(--text-color);
+  font-family: Arial, sans-serif;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+.app-container {
+  display: flex;
+  min-height: 100vh;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 16px;
+}
+
+.todo-panel {
+  width: min(100%, 520px);
+  padding: 32px;
+  border: 1px solid var(--line-color);
+  border-radius: 8px;
+  background: var(--panel-color);
+  box-shadow: 0 20px 50px rgba(29, 22, 49, 0.08);
+}
+
+.app-header {
+  margin-bottom: 24px;
+}
+
+.eyebrow {
+  margin: 0 0 8px;
+  color: var(--primary-color);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+h1 {
+  margin: 0;
+  font-size: 32px;
+  line-height: 1.2;
+}
+
+.subtitle {
+  margin: 10px 0 0;
+  color: var(--muted-color);
+}
+
+.date-panel {
+  display: grid;
+  gap: 14px;
+  margin-bottom: 22px;
+  padding: 16px;
+  border: 1px solid var(--line-color);
+  border-radius: 8px;
+  background: #fbfaff;
+}
+
+.date-navigation,
+.week-navigation {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.date-summary {
+  display: grid;
+  gap: 4px;
+  text-align: center;
+}
+
+.date-label {
+  color: var(--muted-color);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.selected-date-text {
+  color: var(--text-color);
+  font-size: 18px;
+}
+
+.week-title {
+  margin: 0;
+  color: var(--muted-color);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.week-date-list {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 8px;
+}
+
+.week-date-button {
+  display: grid;
+  gap: 4px;
+  min-height: 72px;
+  padding: 9px 6px;
+  background: #ffffff;
+  color: var(--text-color);
+  border: 1px solid var(--line-color);
+}
+
+.week-date-button.today {
+  border-color: var(--primary-color);
+}
+
+.week-date-button.active {
+  background: var(--primary-color);
+  color: #ffffff;
+}
+
+.week-day-name,
+.week-todo-count {
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.week-day-number {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.week-todo-count {
+  color: var(--muted-color);
+}
+
+.week-date-button.active .week-todo-count {
+  color: #ffffff;
+}
+
+.todo-form {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.todo-input {
+  min-width: 0;
+  padding: 14px 16px;
+  border: 1px solid var(--line-color);
+  border-radius: 8px;
+  outline: none;
+}
+
+.todo-input:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(103, 43, 224, 0.14);
+}
+
+.add-button,
+.cancel-edit-button,
+.date-button,
+.week-change-button,
+.week-date-button,
+.filter-button,
+.edit-button,
+.complete-button,
+.clear-button,
+.delete-button {
+  border: 0;
+  border-radius: 8px;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.add-button {
+  padding: 0 18px;
+  background: var(--primary-color);
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.add-button:hover,
+.date-button:hover,
+.week-change-button:hover,
+.week-date-button:hover,
+.edit-button:hover,
+.complete-button:hover,
+.delete-button:hover {
+  transform: translateY(-1px);
+}
+
+.date-button,
+.week-change-button {
+  padding: 9px 12px;
+  background: var(--primary-soft);
+  color: var(--primary-color);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.cancel-edit-button {
+  padding: 0 14px;
+  background: #eeeef4;
+  color: var(--muted-color);
+  font-weight: 700;
+}
+
+.todo-message {
+  min-height: 20px;
+  margin: 0 0 14px;
+  color: var(--danger-color);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.toolbar {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.filter-button {
+  padding: 9px 13px;
+  background: var(--primary-soft);
+  color: var(--primary-color);
+  font-weight: 700;
+}
+
+.filter-button.active {
+  background: var(--primary-color);
+  color: #ffffff;
+}
+
+.todo-list {
+  display: grid;
+  gap: 10px;
+  min-height: 88px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.todo-item,
+.empty-state {
+  border: 1px solid var(--line-color);
+  border-radius: 8px;
+  background: #ffffff;
+}
+
+.todo-item {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 12px;
+  align-items: center;
+  padding: 12px;
+}
+
+.todo-text {
+  overflow-wrap: anywhere;
+}
+
+.todo-item.completed .todo-text {
+  color: var(--muted-color);
+  text-decoration: line-through;
+}
+
+.todo-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.edit-button,
+.complete-button,
+.delete-button {
+  padding: 8px 10px;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.edit-button {
+  background: var(--primary-soft);
+  color: var(--primary-color);
+}
+
+.complete-button {
+  background: #edf8f0;
+  color: #287a3e;
+}
+
+.delete-button {
+  background: #fff0f3;
+  color: var(--danger-color);
+}
+
+.hidden {
+  display: none;
+}
+
+.empty-state {
+  padding: 24px;
+  color: var(--muted-color);
+  text-align: center;
+}
+
+.todo-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 18px;
+  color: var(--muted-color);
+  font-size: 14px;
+}
+
+.clear-button {
+  padding: 9px 12px;
+  background: transparent;
+  color: var(--muted-color);
+}
+
+.clear-button:hover {
+  background: var(--primary-soft);
+  color: var(--primary-color);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+}
+
+@media (max-width: 520px) {
+  .todo-panel {
+    padding: 24px;
+  }
+
+  .date-navigation,
+  .week-navigation {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .week-date-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .todo-form {
+    grid-template-columns: 1fr;
+  }
+
+  .todo-footer,
+  .toolbar {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .add-button,
+  .cancel-edit-button,
+  .date-button,
+  .week-change-button,
+  .filter-button,
+  .edit-button,
+  .complete-button,
+  .clear-button {
+    width: 100%;
+    min-height: 44px;
+  }
+
+  .todo-item {
+    grid-template-columns: 1fr;
+  }
+
+  .todo-actions {
+    flex-direction: column;
+  }
+}
