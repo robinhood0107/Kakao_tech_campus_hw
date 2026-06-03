@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vanilla Todo</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <main class="app-container">
+      <section class="todo-panel" aria-labelledby="app-title">
+        <header class="app-header">
+          <p class="eyebrow">Productivity</p>
+          <h1 id="app-title">오늘의 할 일</h1>
+          <p class="subtitle">작게 기록하고, 차분하게 완료해요.</p>
+        </header>
+
+        <section class="date-panel" aria-label="날짜 선택">
+          <div class="date-navigation">
+            <button class="date-button" id="previousDateButton" type="button">
+              이전 날짜
+            </button>
+
+            <div class="date-summary">
+              <span class="date-label">선택 날짜</span>
+              <strong class="selected-date-text" id="selectedDateText"></strong>
+            </div>
+
+            <button class="date-button" id="nextDateButton" type="button">
+              다음 날짜
+            </button>
+          </div>
+
+          <div class="week-navigation">
+            <button class="week-change-button" id="previousWeekButton" type="button">
+              이전 주
+            </button>
+            <p class="week-title">주간 보기</p>
+            <button class="week-change-button" id="nextWeekButton" type="button">
+              다음 주
+            </button>
+          </div>
+
+          <div class="week-date-list" id="weekDateList" aria-label="주간 날짜 목록"></div>
+        </section>
+
+        <form class="todo-form" id="todoForm">
+          <label class="sr-only" for="todoInput">새 할 일</label>
+          <input
+            id="todoInput"
+            class="todo-input"
+            type="text"
+            placeholder="할 일을 입력하세요"
+            autocomplete="off"
+          />
+          <button class="add-button" id="submitButton" type="submit">추가</button>
+          <button class="cancel-edit-button hidden" id="cancelEditButton" type="button">
+            취소
+          </button>
+        </form>
+
+        <p class="todo-message" id="todoMessage" aria-live="polite"></p>
+
+        <div class="toolbar" aria-label="할 일 필터">
+          <button class="filter-button active" type="button" data-filter="all">전체</button>
+          <button class="filter-button" type="button" data-filter="active">진행</button>
+          <button class="filter-button" type="button" data-filter="completed">완료</button>
+        </div>
+
+        <ul class="todo-list" id="todoList" aria-live="polite"></ul>
+
+        <footer class="todo-footer">
+          <span id="remainingCount">남은 할 일 0개</span>
+          <button class="clear-button" id="clearCompletedButton" type="button">
+            완료 항목 삭제
+          </button>
+        </footer>
+      </section>
+    </main>
+  </body>
+</html>
