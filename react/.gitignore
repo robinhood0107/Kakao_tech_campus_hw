@@ -44,8 +44,9 @@ test-results/
 .DS_Store
 Thumbs.db
 
-# Editor folders and files
-.vscode/
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
 .idea/
 *.suo
 *.ntvs*

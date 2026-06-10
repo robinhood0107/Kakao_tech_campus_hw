@@ -1,0 +1,50 @@
+name: React Todo CI
+
+on:
+  pull_request:
+    branches: [dev, main]
+    paths:
+      - ".github/workflows/react-ci.yml"
+      - "react/**"
+  push:
+    branches: [dev, main, "feature/**"]
+    paths:
+      - ".github/workflows/react-ci.yml"
+      - "react/**"
+
+jobs:
+  verify:
+    name: Lint, test, build, and E2E
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: react
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: react/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright browser
+        run: npx playwright install --with-deps chromium
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Unit and component tests
+        run: npm run test
+
+      - name: Build
+        run: npm run build
+
+      - name: E2E tests
+        run: npm run test:e2e
