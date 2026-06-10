@@ -152,14 +152,9 @@ function App() {
     <main className="min-h-screen bg-slate-100 px-4 py-8 text-slate-950 sm:px-6">
       <section className="mx-auto grid w-full max-w-4xl gap-5">
         <header className="grid gap-3 rounded-lg border border-slate-200 bg-white p-6 shadow-sm">
-          <p className="text-sm font-extrabold text-violet-600">React + Vite Todo</p>
           <h1 className="text-3xl font-black tracking-tight text-slate-950 sm:text-4xl">
             오늘의 할 일
           </h1>
-          <p className="max-w-2xl text-sm font-medium leading-6 text-slate-600">
-            Vanilla JS에서 직접 DOM을 고치던 Todo 앱을 React 상태, 파생 데이터, useEffect 저장
-            흐름으로 옮긴 과제 화면입니다.
-          </p>
         </header>
 
         <DateNavigator
