@@ -6,23 +6,38 @@ on:
     paths:
       - ".github/workflows/react-ci.yml"
       - "react/**"
+      - "backend/**"
   push:
     branches: [dev, main, "feature/**"]
     paths:
       - ".github/workflows/react-ci.yml"
       - "react/**"
+      - "backend/**"
 
 jobs:
   verify:
-    name: Lint, test, build, and E2E
+    name: Backend, lint, test, build, and E2E
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: react
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install backend dependencies
+        working-directory: backend
+        run: |
+          python -m venv .venv
+          .venv/bin/python -m pip install --upgrade pip
+          .venv/bin/python -m pip install -r requirements.txt
+
+      - name: Backend tests
+        working-directory: backend
+        run: .venv/bin/python -m pytest
 
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -32,19 +47,29 @@ jobs:
           cache-dependency-path: react/package-lock.json
 
       - name: Install dependencies
+        working-directory: react
         run: npm ci
 
       - name: Install Playwright browser
+        working-directory: react
         run: npx playwright install --with-deps chromium
 
       - name: Lint
+        working-directory: react
         run: npm run lint
 
-      - name: Unit and component tests
+      - name: Typecheck
+        working-directory: react
+        run: npm run typecheck
+
+      - name: Unit tests
+        working-directory: react
         run: npm run test
 
       - name: Build
+        working-directory: react
         run: npm run build
 
       - name: E2E tests
+        working-directory: react
         run: npm run test:e2e
