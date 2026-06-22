@@ -4,7 +4,7 @@
 
 ## 실행
 
-백엔드:
+백엔드는 저장소 루트에서 실행합니다. 마지막 명령은 서버를 켜는 명령이라 터미널이 계속 실행된 상태로 남아 있습니다.
 
 ```bash
 cd backend
@@ -13,7 +13,7 @@ python3 -m venv .venv
 .venv/bin/python -m uvicorn main:app --reload --host 127.0.0.1 --port 8000
 ```
 
-프론트엔드:
+프론트엔드는 새 터미널을 열고 저장소 루트에서 실행합니다.
 
 ```bash
 cd react
@@ -37,7 +37,7 @@ npm run dev
 
 ```bash
 cd backend
-.venv/bin/python -m pytest
+.venv/bin/python -m pytest -q -s
 
 cd ../react
 npm run lint
