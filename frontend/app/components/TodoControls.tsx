@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, useMemo, useRef, useState } from "react";
+import { FormEvent, useMemo, useRef, useState, useTransition } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 import { FILTER_LABELS, TODO_FILTERS } from "@/app/lib/query";
@@ -16,6 +16,7 @@ export function TodoControls({ query }: TodoControlsProps) {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
+  const [isPending, startTransition] = useTransition();
   const [search, setSearch] = useState(query.search);
   const [date, setDate] = useState(query.date);
   const selectedFilterRef = useRef(query.filter);
@@ -32,7 +33,11 @@ export function TodoControls({ query }: TodoControlsProps) {
 
   function replaceParams(nextParams: URLSearchParams) {
     const queryString = nextParams.toString();
-    router.push(queryString ? `${pathname}?${queryString}` : pathname);
+    const href = queryString ? `${pathname}?${queryString}` : pathname;
+
+    startTransition(() => {
+      router.push(href);
+    });
   }
 
   function handleFilterChange(filter: TodoFilter) {
@@ -93,6 +98,7 @@ export function TodoControls({ query }: TodoControlsProps) {
               type="button"
               role="tab"
               aria-selected={isSelected}
+              disabled={isPending}
               onClick={() => handleFilterChange(filter)}
             >
               {FILTER_LABELS[filter]}
@@ -113,10 +119,12 @@ export function TodoControls({ query }: TodoControlsProps) {
             value={search}
             onChange={(event) => setSearch(event.target.value)}
             placeholder="검색어"
+            disabled={isPending}
           />
           <button
             className="rounded-md bg-slate-950 px-4 py-2 text-sm font-bold text-white transition hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-slate-500"
             type="submit"
+            disabled={isPending}
           >
             검색
           </button>
@@ -132,10 +140,12 @@ export function TodoControls({ query }: TodoControlsProps) {
             type="date"
             value={date}
             onChange={(event) => setDate(event.target.value)}
+            disabled={isPending}
           />
           <button
             className="rounded-md bg-slate-100 px-4 py-2 text-sm font-bold text-slate-700 transition hover:bg-slate-200 focus:outline-none focus:ring-2 focus:ring-slate-500"
             type="submit"
+            disabled={isPending}
           >
             날짜 적용
           </button>
