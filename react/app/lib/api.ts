@@ -7,7 +7,7 @@ type TodoApiQuery = {
   date?: string;
 };
 
-const backendUrl = process.env.BACKEND_URL ?? "http://127.0.0.1:8000";
+const backendUrl = process.env.BACKEND_URL ?? "http://127.0.0.1:9010";
 
 const backendClient = axios.create({
   baseURL: backendUrl,
